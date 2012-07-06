@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>cn.com.restart</groupId>
-	<artifactId>restart-parent</artifactId>
+	<groupId>cn.com.rebirth</groupId>
+	<artifactId>rebirth-parent</artifactId>
 	<version>0.0.1.RC1-SNAPSHOT</version>
-	<name>Restart :: Parent</name>
+	<name>Rebirth :: Parent</name>
 	<packaging>pom</packaging>
 
 	<properties>
-		<!-- 主要依赖库的版本定义 -->		
+		<!-- 主要依赖库的版本定义 -->	
+		<rebirth.version>0.0.1.RC1-SNAPSHOT</rebirth.version>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<hibernate.version>4.1.3.Final</hibernate.version>
 		<mybatis.version>3.1.1</mybatis.version>
@@ -38,7 +39,7 @@
 		<mockito.version>1.9.0</mockito.version>
 		<powermock.version>1.4.12</powermock.version>
 		<selenium.version>2.21.0</selenium.version>
-
+		<lucene.version>3.5.0</lucene.version>
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.6</jdk.version>
@@ -99,7 +100,16 @@
 	<dependencyManagement>
 		<dependencies>
 			<!-- Restart MODULES begin -->
-			
+			<dependency>
+				<groupId>cn.com.rebirth</groupId>
+				<artifactId>rebirth-commons</artifactId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>rebirth-search-commons</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
 			<!-- Restart MODULES end -->
 
 			<!-- SPRING begin -->
@@ -559,6 +569,11 @@
   				<artifactId>jackson-datatype-hibernate4</artifactId>
   				<version>${jackson.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+  				<artifactId>jackson-dataformat-smile</artifactId>
+  				<version>${jackson.version}</version>
+			</dependency>
 			<!-- JSON end -->
 
 			<!-- GENERAL UTILS begin -->
@@ -640,6 +655,11 @@
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
+				<version>4.2-beta1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpmime</artifactId>
 				<version>4.2-beta1</version>
 			</dependency>
 
@@ -777,6 +797,80 @@
 				<scope>test</scope>
 			</dependency>
 			<!-- TEST end -->
+			<!--lucene begin -->
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-core</artifactId>
+				<version>${lucene.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-analyzers</artifactId>
+				<version>${lucene.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-highlighter</artifactId>
+				<version>${lucene.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-grouping</artifactId>
+				<version>${lucene.version}</version>
+			</dependency>
+			<!--lucene end -->
+			
+			
+			<!-- Socket framework -->
+			<!-- apache mina -->
+			<dependency>
+				<groupId>org.apache.mina</groupId>
+				<artifactId>mina-core</artifactId>
+				<version>2.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty</artifactId>
+				<version>3.3.0.Final</version>
+			</dependency>
+			<!-- end Socket framework -->
+			<!-- Hadoop begin or other -->
+			<!-- zookeeper config -->
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>3.4.3</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.jboss.netty</groupId>
+						<artifactId>netty</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- Hadoop end -->
+			<dependency>
+				<groupId>com.github.sgroschupf</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>0.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.hadoop.zookeeper</groupId>
+						<artifactId>zookeeper</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
