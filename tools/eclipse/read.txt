@@ -1,0 +1,35 @@
+   1.  导入chinacti的代码格式与Cleanup规则，详见后面的附录 (Preferences->Java->Code Style下的Cleanup和Formatter，两者的Profile文件在/eclipse/中)
+   2. 设置import static默认使用.* (Preferences-> Java -> Code Style -> Organize Imports, 设置Number of static imports need for .* 为 1)
+   3. 手工修改warning设置，详见后面的附录 (Preferences-> Java ->Compiler->Errors/Warining, 抱怨一下Eclipse，这里居然没有输出模板的功能 )
+   4. 设置保存代码时的自动操作 ,包括：format source code->all lines，与Organize  Imports。(Preference->Java->Editor->SaveAction)
+   5. 调整与输入法切换冲突的内容助手热键.(Preference->General->Keys, 找到Content Assist, 改为诸如Shift+Space)
+   6. 取消XML缺少DTD的warning 并设置XML每行长度为120字符, (Preference->XML->XML Files下的Editor和Validation)
+
+
+
+    *  SubEclipse插件，Subversion插件
+    * Spring IDE插件，Spring辅助插件(Updatesite : http://dist.springsource.com/release/TOOLS/update/e3.5, 只下载其中的Spring IDE就足够.)
+    http://dist.springframework.org/release/IDE
+
+    * Checkstyle插件，代码质量自动检查插件.
+    * MoreUnit插件，   单元测试辅助插件.
+    * ECobertura插件   Cobertura测试覆盖率插件.
+    * EasyShell，       可从Eclipse快速切换到文件所在Windows目录或dos窗口。
+
+
+
+
+ 3.3 手工进行Java Compile Warning的修改
+
+    * Code Style:
+      增加全部，除Unqualified access to instance field , Undocumented empty block 和 Non-externalized strings
+    * Potential programming problem
+      增加全部，除Boxing and UnBoxing
+    * Name shadowing and confict
+      增加全部
+    * Unecessary Code
+      增加全部, 除Unnecessary 'else' statement
+    * Annoatation
+      增加全部
+
+

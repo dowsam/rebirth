@@ -1,0 +1,4 @@
+/*
+ * Copyright (c) 2005-${year} www.china-cti.com All rights reserved
+ * Info:${project_name} ${file_name} ${date} ${time} ${user}$$
+ */
