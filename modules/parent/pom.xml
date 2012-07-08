@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<!-- 主要依赖库的版本定义 -->	
+		<!-- 主要依赖库的版本定义 -->
 		<rebirth.version>0.0.1.RC1-SNAPSHOT</rebirth.version>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<hibernate.version>4.1.3.Final</hibernate.version>
@@ -25,7 +25,7 @@
 		<jackson.version>2.0.2</jackson.version>
 		<spymemcached.version>2.8.1</spymemcached.version>
 		<jolokia.version>1.0.3</jolokia.version>
-		<guava.version>12.0</guava.version>
+		<guava.version>11.0.2</guava.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
 		<commons-io.version>2.3</commons-io.version>
 		<joda-time.version>2.1</joda-time.version>
@@ -47,17 +47,22 @@
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
-		<repository>
-			<id>nexus</id>
-			<name>Team Nexus Repository</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> 
-		</repository>
-		-->
+		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. <repository> <id>nexus</id> <name>Team 
+			Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
+			</repository> -->
 		<repository>
 			<id>central</id>
 			<name>Central Repository</name>
-			<url>http://repo.maven.apache.org/maven2</url>	
+			<url>http://repo.maven.apache.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>rebirth</id>
+			<name>Rebirth Additional Repository</name>
+			<url>svn://svn.jsp1.net/rebirth/repository</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -71,31 +76,36 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		
-	    <repository>
-	      <id>spy</id>
-	      <name>Spy Repository</name>
-	      <layout>default</layout>
-	      <url>http://files.couchbase.com/maven2/</url>
-	      <snapshots>
-	        <enabled>false</enabled>
-	      </snapshots>
-	    </repository>
-	</repositories>
 
-	<!-- 设定插件仓库 如有Nexus私服, 取消注释并指向正确的服务器地址. 
-	<pluginRepositories> 
-		<pluginRepository> 
-			<id>nexus</id>
-			<name>Team Nexus Repository</name>
-			<url>http://localhost:8081/nexus/content/groups/public</url> 
+		<repository>
+			<id>spy</id>
+			<name>Spy Repository</name>
+			<layout>default</layout>
+			<url>http://files.couchbase.com/maven2/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	-->
-	
+		</repository>
+	</repositories>
+
+	<!-- 设定插件仓库 如有Nexus私服, 取消注释并指向正确的服务器地址. <pluginRepositories> <pluginRepository> 
+		<id>nexus</id> <name>Team Nexus Repository</name> <url>http://localhost:8081/nexus/content/groups/public</url> 
+		<snapshots> <enabled>false</enabled> </snapshots> </pluginRepository> </pluginRepositories> -->
+	<!-- 设定使用Release插件发布的仓库服务器 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
+	<distributionManagement>
+		<repository>
+			<id>rebirth-releases</id>
+			<name>Rebirth Additional Repository</name>
+			<url>svn:svn://svn.jsp1.net/rebirth/repository</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>rebirth-snapshot</id>
+			<name>Rebirth Additional Repository</name>
+			<url>svn:svn://svn.jsp1.net/rebirth/repository</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
 	<dependencyManagement>
 		<dependencies>
@@ -106,7 +116,32 @@
 				<version>${rebirth.version}</version>
 			</dependency>
 			<dependency>
+				<artifactId>rebirth-analyzer</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>rebirth-search-analysis-provider</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
 				<artifactId>rebirth-search-commons</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>rebirth-search-core</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>rebirth-search-hadoop</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>rebirth-search-client</artifactId>
 				<groupId>cn.com.rebirth</groupId>
 				<version>${rebirth.version}</version>
 			</dependency>
@@ -196,14 +231,14 @@
 				<artifactId>hibernate-jpa-2.0-api</artifactId>
 				<version>1.0.1.Final</version>
 			</dependency>
-			
+
 			<!-- spring data jpa -->
 			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-jpa</artifactId>
 				<version>${spring-data-jpa.version}</version>
-        	</dependency>
-			
+			</dependency>
+
 			<!-- mybatis -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
@@ -431,7 +466,7 @@
 				<version>1.0.0</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<!-- ehcache -->
 			<dependency>
 				<groupId>net.sf.ehcache</groupId>
@@ -446,8 +481,8 @@
 				<artifactId>jolokia-core</artifactId>
 				<version>${jolokia.version}</version>
 			</dependency>
-			<!-- jolokia end-->
-			
+			<!-- jolokia end -->
+
 			<!-- LOGGING begin -->
 			<!-- slf4j -->
 			<dependency>
@@ -534,7 +569,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			
+
 			<!-- jaxb -->
 			<dependency>
 				<groupId>javax.xml.bind</groupId>
@@ -566,13 +601,13 @@
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.datatype</groupId>
-  				<artifactId>jackson-datatype-hibernate4</artifactId>
-  				<version>${jackson.version}</version>
+				<artifactId>jackson-datatype-hibernate4</artifactId>
+				<version>${jackson.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.dataformat</groupId>
-  				<artifactId>jackson-dataformat-smile</artifactId>
-  				<version>${jackson.version}</version>
+				<artifactId>jackson-dataformat-smile</artifactId>
+				<version>${jackson.version}</version>
 			</dependency>
 			<!-- JSON end -->
 
@@ -650,7 +685,7 @@
 				<artifactId>hibernate-validator</artifactId>
 				<version>${hibernate-validator.version}</version>
 			</dependency>
-			
+
 			<!-- httpclient -->
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
@@ -689,7 +724,7 @@
 				<version>4.8.1.1</version>
 			</dependency>
 			<!-- OTHER UTILS end -->
-	
+
 			<!-- TEST begin -->
 			<!-- junit -->
 			<dependency>
@@ -745,7 +780,7 @@
 				<version>${jetty.version}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<!-- selenium 2.0 -->
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
@@ -789,7 +824,7 @@
 				<version>${h2.version}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.icegreen</groupId>
 				<artifactId>greenmail</artifactId>
@@ -819,8 +854,8 @@
 				<version>${lucene.version}</version>
 			</dependency>
 			<!--lucene end -->
-			
-			
+
+
 			<!-- Socket framework -->
 			<!-- apache mina -->
 			<dependency>
@@ -871,6 +906,15 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			<!-- jsw + jetty(tomcat) runtime -->
+			<dependency>
+				<groupId>tanukisoft</groupId>
+				<artifactId>jsw</artifactId>
+				<version>3.5.4</version>
+				<scope>provided</scope>
+				<type>zip</type>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -915,14 +959,14 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-				
+
 				<!-- 增加更多的Source和Test Source目录插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>1.7</version>
 				</plugin>
-				
+
 				<!-- cobertura 测试覆盖率统计插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -990,7 +1034,7 @@
 					<artifactId>jetty-maven-plugin</artifactId>
 					<version>${jetty.version}</version>
 				</plugin>
-				
+
 				<!-- assembly插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -1016,77 +1060,29 @@
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>1.7</version>
 				</plugin>
-				
+
 				<!-- exec java 插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
 					<version>1.2.1</version>
 				</plugin>
-				
+
 				<!-- sonar插件 -->
-        		<plugin>
-        			<groupId>org.codehaus.sonar</groupId>
-        			<artifactId>sonar-maven3-plugin</artifactId>
-        			<version>3.0</version>
-        		</plugin>
+				<plugin>
+					<groupId>org.codehaus.sonar</groupId>
+					<artifactId>sonar-maven3-plugin</artifactId>
+					<version>3.0</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
+		<extensions>
+			<extension>
+				<groupId>org.jvnet.wagon-svn</groupId>
+				<artifactId>wagon-svn</artifactId>
+				<version>1.12</version>
+			</extension>
+		</extensions>
 	</build>
 	
-	<profiles>
-		<!-- 仅执行smoke test-->
-		<profile>
-			<id>smoke-test</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<groups>org.springside.modules.test.category.Smoke</groups>
-							<includes>
-								<include>**/*IT.java</include>
-							</includes>
-						</configuration>
-					</plugin>		
-				</plugins>
-			</build>
-		</profile>
-	
-		<!-- 执行所有functional test-->
-		<profile>
-			<id>functional-test</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<includes>
-								<include>**/*IT.java</include>
-							</includes>
-						</configuration>
-					</plugin>	
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- 忽略所有@Category(UnStable.class)的TestCase -->
-		<profile>
-			<id>skip-unstable</id>
-			<build>
-				<plugins>
-					<!-- test plugin, exclude unstable case -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<excludedGroups>org.springside.modules.test.category.UnStable</excludedGroups>
-						</configuration>
-					</plugin>				
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>
