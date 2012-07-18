@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.com.rebirth</groupId>
+		<artifactId>rebirth-parent</artifactId>
+		<relativePath>modules/parent/</relativePath>
+		<version>0.0.2.RC1.SNAPSHOT</version>
+	</parent>
+	<artifactId>rebirth-root</artifactId>
+	<packaging>pom</packaging>
+	<name>ChinaCti Rebirth Root Project</name>
+	<url>http://www.china-cti.com</url>
+	<!-- 定义开发者信息 -->
+	<developers>
+		<developer>
+			<id>lixn</id>
+			<email>l.xue.nong@gmail.com</email>
+			<url>http://www.chian-cti.com.cn</url>
+			<organization>chinacti</organization>
+		</developer>	
+	</developers>
+
+	<mailingLists>
+		<mailingList>
+			<name>l.xue.nong</name>
+			<post>l.xue.nong@gmail.com</post>
+		</mailingList>
+	</mailingLists>
+
+	<scm>
+        <connection>scm:git:git@github.com:dowsam/rebirth.git</connection>
+        <developerConnection>scm:git:git@github.com:dowsam/rebirth.git</developerConnection>
+        <url>http://github.com/dowsam/rebirth.git</url>
+    </scm>
+	
+	<repositories>
+		<repository>
+			<id>ljump</id>
+			<name>Ljump Additional Repository</name>
+			<url>http://ljump.googlecode.com/svn/repository</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>ljump</id>
+			<name>Ljump Additional Repository</name>
+			<url>http://ljump.googlecode.com/svn/repository</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	<modules>
+		<module>modules</module>
+		<module>tools/maven/rebirth-service-middleware-server-project/archetype</module>
+	</modules>
+	
+</project>

@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.com.rebirth</groupId>
 	<artifactId>rebirth-parent</artifactId>
-	<version>0.0.1.RELEASE</version>
+	<version>0.0.2.RC1.SNAPSHOT</version>
 	<name>Rebirth :: Parent</name>
 	<packaging>pom</packaging>
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<rebirth.version>0.0.1.RELEASE</rebirth.version>
+		<rebirth.version>0.0.2.RC1.SNAPSHOT</rebirth.version>
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<hibernate.version>4.1.3.Final</hibernate.version>
 		<mybatis.version>3.1.1</mybatis.version>
@@ -40,6 +40,7 @@
 		<selenium.version>2.21.0</selenium.version>
 		<lucene.version>3.5.0</lucene.version>
 		<tomcat.version>6.0.29</tomcat.version>
+		<jetty.version>7.6.3.v20120416</jetty.version>
 		<thymeleaf.version>2.0.8</thymeleaf.version>
 		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -171,6 +172,21 @@
 			</dependency>
 			<dependency>
 				<artifactId>rebirth-search-client</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>rebirth-service-middleware-commons</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>rebirth-service-middleware-server</artifactId>
+				<groupId>cn.com.rebirth</groupId>
+				<version>${rebirth.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>rebirth-service-middleware-client</artifactId>
 				<groupId>cn.com.rebirth</groupId>
 				<version>${rebirth.version}</version>
 			</dependency>
