@@ -5,7 +5,7 @@
 		<groupId>cn.com.rebirth</groupId>
 		<artifactId>rebirth-parent</artifactId>
 		<relativePath>modules/parent/</relativePath>
-		<version>0.0.2.RC1.SNAPSHOT</version>
+		<version>0.0.2.RC5.SNAPSHOT</version>
 	</parent>
 	<artifactId>rebirth-root</artifactId>
 	<packaging>pom</packaging>
