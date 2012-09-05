@@ -64,9 +64,10 @@
 		<repository>
 			<id>rebirth</id>
 			<name>Rebirth Additional Repository</name>
-			<url>svn://svn.jsp1.net/rebirth/repository</url>
+			<url>svn:svn://svn.jsp1.net/rebirth/repository</url>
+			<!-- 开发过程中可以用，并且定义svn的协议 -->
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</snapshots>
 		</repository>
 
