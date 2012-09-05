@@ -5,7 +5,7 @@
 			<groupId>cn.com.rebirth</groupId>
 			<artifactId>rebirth-parent</artifactId>
 			<relativePath>../../../modules/parent/</relativePath>
-			<version>0.0.2.RC4.SNAPSHOT</version>
+			<version>0.0.2.RC5.SNAPSHOT</version>
 	</parent>
   <groupId>cn.com.rebirth</groupId>
   <artifactId>rebirth-service-middleware-server-project-archetype</artifactId>
